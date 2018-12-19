@@ -1,0 +1,53 @@
+@{
+ViewData["Title"] = "Home Page";
+}
+@model wall.Models.IndexViewModel
+<nav class="navbar navbar-expand-sm bg-primary">
+    <h1 class='header'>Welcome to the Wall!</h1>
+</nav>
+<div class="container">
+    <form asp-action="Register" asp-controller="Home" method="POST" id="registration" class='big_form'>
+        <div class="form-group">
+            <span asp-validation-for="@Model.User.FirstName"></span>
+            <label asp-for="@Model.User.FirstName"></label>
+            <input type="text" asp-for='@Model.User.FirstName' class="form-control" id="exampleFormControlInput1">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="@Model.User.LastName"></span>
+            <label asp-for="@Model.User.LastName"></label>
+            <input type="text" asp-for='@Model.User.LastName' class="form-control" id="exampleFormControlInput1">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="@Model.User.Email"></span>
+            <label asp-for="@Model.User.Email"></label>
+            <input type="text" asp-for='@Model.User.Email' class="form-control" id="exampleFormControlInput1">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="@Model.User.Password"></span>
+            <label asp-for="@Model.User.Password"></label>
+            <input type="Password" asp-for='@Model.User.Password' class="form-control" id="exampleFormControlInput1">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="@Model.User.Confirm"></span>
+            <label asp-for="@Model.User.Confirm"></label>
+            <input type="Password" asp-for='@Model.User.Confirm' class="form-control" id="exampleFormControlInput1">
+        </div>
+        <button type="submit" value='submit' id="button" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<div class="container">
+    <form asp-action="Login" asp-controller="Home" method='post' id="login" class='big_form'>
+        <div class="form-group">
+            <h1>Login</h1>
+            <span asp-validation-for="@Model.LoginUser.Email"></span>
+            <label asp-for="@Model.LoginUser.Email"></label>
+            <input type="text" asp-for="@Model.LoginUser.Email" class="form-control" id="exampleFormControlInput1">
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="@Model.LoginUser.Password"></span>
+            <label asp-for="@Model.LoginUser.Password"></label>
+            <input type="password" asp-for="@Model.LoginUser.Password" class="form-control" id="exampleFormControlInput1">
+        </div>
+        <button type="submit" value='submit' id="button" class="btn btn-primary">Submit</button>
+    </form>
+</div>

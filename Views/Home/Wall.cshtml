@@ -1,0 +1,48 @@
+@{
+ViewData["Title"] = "Home Page";
+}
+@model wall.Models.WallViewModel
+<nav class="navbar navbar-expand-sm bg-primary">
+    <h1 id="introduction" class='header'>Welcome @ViewBag.User.FirstName @ViewBag.User.LastName</h1>
+    <a href="/Logout" id="logout" class="btn btn-danger">Logout</a>
+</nav>
+<div id='post_message'>
+    <p>Post message to wall</p>
+    <form asp-action="Message" asp-controller="Home" method="post">
+
+        <span asp-validation-for="@Model.Message.message"></span>
+        <label asp-for="@Model.Message.message">Message:</label>
+        <input asp-for="@Model.Message.message">
+        <input value="Submit" class="btn btn-primary" type="submit">
+    </form>
+</div>
+<div id='message_wall'>
+    @foreach(var user in ViewBag.MessagesComments){
+    @foreach(var msg in User.messages)
+    {
+    <h5>@User.FirstName - @msg.CreatedAt <a href="like/@msg.MessageId">Like</a></h5>>
+    <p id="message">@msg.Message</p>
+    <form action="/Delete" method="POST">
+        <input type="submit" value="Delete Message" id="delete_button" class="btn btn-danger">
+        <input type="hidden" name="message_id" value="msg.MessageId">
+        <input type="hidden" name="user_id" value="@User.UserId">
+    </form>
+    <ul>
+        @foreach(var comment in msg.Comments){
+        <li class="comments">@Comment.User.FirstName - @Comment.Message | @Comment.CreatedAt</li>
+        }
+    </ul>
+    <div id="post_comment">
+        <form action="/Comment/@msg.MessageId" asp-controller="Home" method="post">
+            <span asp-validation-for="@Model.Comment.Message"></span>
+            <label asp-for="@Model.Comment.comment">Comment:</label>
+            <input asp-for="@Model.Comment.comment">
+            <input value="Submit" type="submit">
+
+        </form>
+    </div>
+    }
+    }
+</div>
+
+</div>
